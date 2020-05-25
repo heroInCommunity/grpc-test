@@ -29,12 +29,7 @@ import javax.annotation.Nullable;
  * @param <T> The concrete type of this builder.
  */
 public abstract class ManagedChannelBuilder<T extends ManagedChannelBuilder<T>> {
-  /**
-   * Creates a channel with the target's address and port number.
-   *
-   * @see #forTarget(String)
-   * @since 1.0.0
-   */
+  
   public static ManagedChannelBuilder<?> forAddress(String name, int port) {
     return ManagedChannelProvider.provider().builderForAddress(name, port);
   }
@@ -124,7 +119,6 @@ public abstract class ManagedChannelBuilder<T extends ManagedChannelBuilder<T>> 
     throw new UnsupportedOperationException();
   }
 
-  @Deprecated
   @ExperimentalApi("https://github.com/grpc/grpc-java/issues/6279")
   public T blockingExecutor(Executor executor) {
     return offloadExecutor(executor);
@@ -158,7 +152,7 @@ public abstract class ManagedChannelBuilder<T extends ManagedChannelBuilder<T>> 
    * Provides a custom {@code User-Agent} for the application.
    *
    * <p>It's an optional parameter. The library will provide a user agent independent of this
-   * option. If provided, the given agent will prepend the library's user agent information.
+   * option. If provided, then given agent will prepend the library's user agent information.
    *
    * @return this
    * @since 1.0.0
@@ -184,7 +178,7 @@ public abstract class ManagedChannelBuilder<T extends ManagedChannelBuilder<T>> 
    * <p>Should only be used for testing or for APIs where the use of such API or the data
    * exchanged is not sensitive.
    *
-   * <p>This assumes prior knowledge that the target of this channel is using plaintext.  It will
+   * <p>This assumes prior knowledge that the target of this channel is using plaintext.  It would
    * not perform HTTP/1.1 upgrades.
    *
    * @return this
