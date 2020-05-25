@@ -24,9 +24,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
  * a route table via this identifier.
  * </pre>
  */
-@javax.annotation.Generated(
-    value = "by gRPC proto compiler",
-    comments = "Source: envoy/api/v2/rds.proto")
+@javax.annotation.Generated(value = "by gRPC proto compiler", comments = "Source: envoy/api/v2/rds.proto")
 public final class RouteDiscoveryServiceGrpc {
 
   private RouteDiscoveryServiceGrpc() {}
@@ -142,7 +140,7 @@ public final class RouteDiscoveryServiceGrpc {
   }
 
   /**
-   * Creates a new blocking-style stub that supports unary and streaming output calls on the service
+   * Creates a new blocking stub that supports unary and streaming output calls on the service
    */
   public static RouteDiscoveryServiceBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
@@ -157,7 +155,7 @@ public final class RouteDiscoveryServiceGrpc {
   }
 
   /**
-   * Creates a new ListenableFuture-style stub that supports unary calls on the service
+   * Creates a new ListenableFuture stub that supports unary calls on the service
    */
   public static RouteDiscoveryServiceFutureStub newFutureStub(
       io.grpc.Channel channel) {
@@ -182,22 +180,16 @@ public final class RouteDiscoveryServiceGrpc {
    */
   public static abstract class RouteDiscoveryServiceImplBase implements io.grpc.BindableService {
 
-    /**
-     */
     public io.grpc.stub.StreamObserver<io.envoyproxy.envoy.api.v2.DiscoveryRequest> streamRoutes(
         io.grpc.stub.StreamObserver<io.envoyproxy.envoy.api.v2.DiscoveryResponse> responseObserver) {
       return asyncUnimplementedStreamingCall(getStreamRoutesMethod(), responseObserver);
     }
 
-    /**
-     */
     public io.grpc.stub.StreamObserver<io.envoyproxy.envoy.api.v2.DeltaDiscoveryRequest> deltaRoutes(
         io.grpc.stub.StreamObserver<io.envoyproxy.envoy.api.v2.DeltaDiscoveryResponse> responseObserver) {
       return asyncUnimplementedStreamingCall(getDeltaRoutesMethod(), responseObserver);
     }
 
-    /**
-     */
     public void fetchRoutes(io.envoyproxy.envoy.api.v2.DiscoveryRequest request,
         io.grpc.stub.StreamObserver<io.envoyproxy.envoy.api.v2.DiscoveryResponse> responseObserver) {
       asyncUnimplementedUnaryCall(getFetchRoutesMethod(), responseObserver);
