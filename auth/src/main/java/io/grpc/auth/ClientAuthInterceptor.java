@@ -34,16 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
-/**
- * Client interceptor that authenticates all calls by binding header data provided by a credential.
- * Typically this will populate the Authorization header but other headers may also be filled out.
- *
- * <p>Uses the new and simplified Google auth library:
- * https://github.com/google/google-auth-library-java
- *
- * @deprecated use {@link MoreCallCredentials#from(Credentials)} instead.
- */
-@Deprecated
 public final class ClientAuthInterceptor implements ClientInterceptor {
 
   private final Credentials credentials;
@@ -52,7 +42,7 @@ public final class ClientAuthInterceptor implements ClientInterceptor {
   private Map<String, List<String>> lastMetadata;
 
   public ClientAuthInterceptor(
-      Credentials credentials, @SuppressWarnings("unused") Executor executor) {
+      Credentials credentials, Executor executor) {
     this.credentials = Preconditions.checkNotNull(credentials, "credentials");
     // TODO(louiscryan): refresh token asynchronously with this executor.
   }
@@ -102,7 +92,7 @@ public final class ClientAuthInterceptor implements ClientInterceptor {
     // Always use HTTPS, by definition.
     final String scheme = "https";
     final int defaultPort = 443;
-    String path = "/" + method.getServiceName();
+    final String path = "/" + method.getServiceName();
     URI uri;
     try {
       uri = new URI(scheme, authority, path, null, null);
