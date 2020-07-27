@@ -41,16 +41,6 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.GuardedBy;
 
-/**
- * Builds a {@link ManagedChannel} that, when provided with a {@link Context}, will automatically
- * monitor the Android device's network state to smoothly handle intermittent network failures.
- *
- * <p>Currently only compatible with gRPC's OkHttp transport, which must be available at runtime.
- *
- * <p>Requires the Android ACCESS_NETWORK_STATE permission.
- *
- * @since 1.12.0
- */
 public final class AndroidChannelBuilder extends ForwardingChannelBuilder<AndroidChannelBuilder> {
 
   private static final String LOG_TAG = "AndroidChannelBuilder";
@@ -77,18 +67,10 @@ public final class AndroidChannelBuilder extends ForwardingChannelBuilder<Androi
     return new AndroidChannelBuilder(target);
   }
 
-  /**
-   * Creates a new builder with the given host and port.
-   */
   public static AndroidChannelBuilder forAddress(String name, int port) {
     return forTarget(GrpcUtil.authorityFromHostAndPort(name, port));
   }
 
-  /**
-   * Creates a new builder, which delegates to the given ManagedChannelBuilder.
-   *
-   * @deprecated Use {@link #usingBuilder(ManagedChannelBuilder)} instead.
-   */
   @ExperimentalApi("https://github.com/grpc/grpc-java/issues/6043")
   @Deprecated
   public static AndroidChannelBuilder fromBuilder(ManagedChannelBuilder<?> builder) {
@@ -149,10 +131,6 @@ public final class AndroidChannelBuilder extends ForwardingChannelBuilder<Androi
     return new AndroidChannel(delegateBuilder.build(), context);
   }
 
-  /**
-   * Wraps an OkHttp channel and handles invoking the appropriate methods (e.g., {@link
-   * ManagedChannel#resetConnectBackoff}) when the device network state changes.
-   */
   @VisibleForTesting
   static final class AndroidChannel extends ManagedChannel {
 
